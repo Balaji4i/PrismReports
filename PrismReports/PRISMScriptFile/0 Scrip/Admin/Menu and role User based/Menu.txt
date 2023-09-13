@@ -1,0 +1,47 @@
+SELECT * FROM xxfnd_functions;
+SELECT * FROM xxfnd_appr_users;
+SELECT * FROM xxfnd_appr_roles;
+SELECT * FROM xxfnd_menu_access;
+SELECT * FROM xxfnd_main_menu;
+SELECT * FROM xxfnd_sub_menu;
+
+/
+
+SELECT 
+rownum as s_no,
+u.USER_NAME,
+u.USER_EMAIL_ID,
+r.ROLE_NAME,
+r.DESCRIPTION,
+case 
+when u.USER_EMAIL_ID is null then 'Developer User'
+when u.USER_EMAIL_ID is not null then 'Omniyat User'
+end as User_Type
+,
+--ma.SUB_MENU_ID, 
+case 
+when ma.MENU_DISPLAY='Y' then 'Yes'
+when ma.MENU_DISPLAY='N' then 'No'
+when ma.MENU_DISPLAY is null then 'No'
+end as MENU_DISPLAY ,
+me.MENU_NAME,
+sm.SUB_MENU_NAME,
+case 
+when ma.MENU_CONTROL='F' then 'Full Access'
+when ma.MENU_CONTROL='V' then 'View Access'
+when ma.MENU_CONTROL='N' then 'No Access'
+end as acces_control
+FROM 
+xxfnd_user u, 
+xxfnd_appr_roles r,
+xxfnd_menu_access ma,
+xxfnd_sub_menu sm,
+xxfnd_main_menu me
+where
+u.USER_ROLE_ID=r.ROLE_ID
+and r.ROLE_ID=ma.USER_ROLE_ID
+and u.USER_ROLE_ID=ma.USER_ROLE_ID
+and sm.SUB_MENU_ID=ma.SUB_MENU_ID
+and me.MAIN_MENU_ID=sm.MAIN_MENU_ID
+order by u.USER_NAME
+--and u.USER_ID=50

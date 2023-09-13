@@ -1,0 +1,24 @@
+--------------------------------------------------------
+--  File created - Monday-October-26-2020   
+--------------------------------------------------------
+@C:\Users\Balaji\Documents\sale_backup\BALANCE.sql
+@C:\Users\Balaji\Documents\sale_backup\CUSTOM_METHOD.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_DUE_BASED_COUNT.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_EMPTY_INTERFACE_ERROR.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_EMPTY_PDC_DUE.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_FAILED_RECEIPTS.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_FORFEIT_AMOUNT.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_FUNCTION_ID.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_PENDING_INVOICES.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_REFUND_AMOUNT.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_SOURCE_NUMBER.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_SPA_SIGNED_EVENT.sql
+@C:\Users\Balaji\Documents\sale_backup\GET_TOTALCOUNT.sql
+@C:\Users\Balaji\Documents\sale_backup\IS_AMOUNT_LESS.sql
+@C:\Users\Balaji\Documents\sale_backup\XXPM_FUNC.sql
+@C:\Users\Balaji\Documents\sale_backup\XXPM_UPDATE_STATUS.sql
+@C:\Users\Balaji\Documents\sale_backup\XX_BOOKING_HDR_ID.sql
+@C:\Users\Balaji\Documents\sale_backup\XX_BOOKING_ID.sql
+@C:\Users\Balaji\Documents\sale_backup\XX_BUILD_ID.sql
+@C:\Users\Balaji\Documents\sale_backup\XX_MS_HDR_ID.sql
+@C:\Users\Balaji\Documents\sale_backup\XX_TEST_BLOB.sql

@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Procedure UPDATE_BUILD_FEATUREES
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "UPDATE_BUILD_FEATUREES" 
+AS
+  CURSOR cur_insert
+  IS
+    SELECT BUILD_ID,BUILD_NUMBER FROM XXPM_PROPERTY_BUILDINGS;
+BEGIN
+  FOR i IN cur_insert
+  LOOP
+    UPDATE XXDM_PROPERTY_FEATURES SET BUILD_ID=i.BUILD_ID WHERE BUILD_NUMBER=i.BUILD_NUMBER ;
+  END LOOP;
+  COMMIT;
+END UPDATE_BUILD_FEATUREES;

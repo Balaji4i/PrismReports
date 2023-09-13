@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Table XXFND_CURRENCIES
+--------------------------------------------------------
+
+  CREATE TABLE "XXFND_CURRENCIES" 
+   (	"CURRENCY_CODE" VARCHAR2(15), 
+	"CURRENCY_NAME" VARCHAR2(100), 
+	"DESCRIPTION" VARCHAR2(240), 
+	"ACTIVE_YN" VARCHAR2(1), 
+	"CREATED_BY" VARCHAR2(60), 
+	"CREATION_DATE" TIMESTAMP (6), 
+	"LAST_UPDATED_BY" VARCHAR2(60), 
+	"LAST_UPDATE_DATE" TIMESTAMP (6), 
+	"LAST_UPDATE_LOGIN" VARCHAR2(150)
+   )

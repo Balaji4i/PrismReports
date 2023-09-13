@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table XXFND_MAIN_MENU
+--------------------------------------------------------
+
+  CREATE TABLE "XXFND_MAIN_MENU" 
+   (	"MAIN_MENU_ID" NUMBER, 
+	"MENU_NAME" VARCHAR2(100), 
+	"MENU_NAME_DISP" VARCHAR2(240), 
+	"MENU_NAME_DISP_TL" VARCHAR2(240), 
+	"MENU_ORDER" NUMBER, 
+	"CREATED_BY" VARCHAR2(60), 
+	"CREATION_DATE" TIMESTAMP (6), 
+	"LAST_UPDATED_BY" VARCHAR2(60), 
+	"LAST_UPDATE_DATE" TIMESTAMP (6), 
+	"LAST_UPDATE_LOGIN" VARCHAR2(150), 
+	"MENU_ICON" VARCHAR2(240)
+   )

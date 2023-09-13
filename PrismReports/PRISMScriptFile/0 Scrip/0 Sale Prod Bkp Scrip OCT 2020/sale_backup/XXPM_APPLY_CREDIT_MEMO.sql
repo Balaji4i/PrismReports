@@ -1,0 +1,18 @@
+--------------------------------------------------------
+--  DDL for Table XXPM_APPLY_CREDIT_MEMO
+--------------------------------------------------------
+
+  CREATE TABLE "XXPM_APPLY_CREDIT_MEMO" 
+   (	"CREDIT_MEMO_ID" NUMBER, 
+	"BOOKING_ID" NUMBER, 
+	"ORG_ID" NUMBER, 
+	"ORG_NAME" VARCHAR2(240), 
+	"INVOICE_ID" NUMBER, 
+	"CREDIT_MEMO_TRX_NUMBER" VARCHAR2(60), 
+	"INVOICE_NUMBER" VARCHAR2(60), 
+	"APPLYDATE" VARCHAR2(30), 
+	"GLDATE" VARCHAR2(30), 
+	"INV_AMT" NUMBER, 
+	"APPLIED_RECEIPT_AMOUNT" NUMBER, 
+	"BALANCE" NUMBER
+   )

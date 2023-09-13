@@ -1,0 +1,17 @@
+--------------------------------------------------------
+--  DDL for Table XXSTG_PROJECT_MILESTONES_BKP
+--------------------------------------------------------
+
+  CREATE TABLE "XXSTG_PROJECT_MILESTONES_BKP" 
+   (	"PROJ_MS_ID" NUMBER, 
+	"PROJ_ID" NUMBER, 
+	"MS_NAME" VARCHAR2(240), 
+	"START_DATE" DATE, 
+	"COMPLETION_DATE" DATE, 
+	"ORIG_SYSTEM_REF" NUMBER, 
+	"CREATED_BY" VARCHAR2(60), 
+	"CREATION_DATE" TIMESTAMP (6), 
+	"LAST_UPDATED_BY" VARCHAR2(60), 
+	"LAST_UPDATE_DATE" TIMESTAMP (6), 
+	"LAST_UPDATE_LOGIN" VARCHAR2(150)
+   )

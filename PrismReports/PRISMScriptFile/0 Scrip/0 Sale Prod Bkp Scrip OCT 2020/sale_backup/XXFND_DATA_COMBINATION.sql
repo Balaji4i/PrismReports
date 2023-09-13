@@ -1,0 +1,18 @@
+--------------------------------------------------------
+--  DDL for Table XXFND_DATA_COMBINATION
+--------------------------------------------------------
+
+  CREATE TABLE "XXFND_DATA_COMBINATION" 
+   (	"DCOMB_ID" NUMBER, 
+	"SEGMENT1" VARCHAR2(60), 
+	"SEGMENT2" VARCHAR2(60), 
+	"SEGMENT3" VARCHAR2(60), 
+	"SEGMENT4" VARCHAR2(60), 
+	"SEGMENT5" VARCHAR2(60), 
+	"ACTIVE_YN" VARCHAR2(1), 
+	"CREATED_BY" VARCHAR2(60), 
+	"CREATION_DATE" TIMESTAMP (6), 
+	"LAST_UPDATED_BY" VARCHAR2(60), 
+	"LAST_UPDATE_DATE" TIMESTAMP (6), 
+	"LAST_UPDATE_LOGIN" VARCHAR2(150)
+   )

@@ -1,0 +1,19 @@
+--------------------------------------------------------
+--  DDL for Table XXPM_PL_DISCOUNTS
+--------------------------------------------------------
+
+  CREATE TABLE "XXPM_PL_DISCOUNTS" 
+   (	"DISCOUNT_ID" NUMBER, 
+	"DISCOUNT_NAME" VARCHAR2(30), 
+	"DISCOUNT_LEVEL" VARCHAR2(30), 
+	"DISCOUNT_TYPE" VARCHAR2(30), 
+	"DISCOUNT_VALUE" NUMBER, 
+	"START_DATE" DATE, 
+	"END_DATE" DATE, 
+	"ACTIVE_YN" VARCHAR2(1), 
+	"CREATED_BY" VARCHAR2(60), 
+	"CREATION_DATE" TIMESTAMP (6), 
+	"LAST_UPDATED_BY" VARCHAR2(60), 
+	"LAST_UPDATE_DATE" TIMESTAMP (6), 
+	"LAST_UPDATE_LOGIN" VARCHAR2(150)
+   )

@@ -1,0 +1,46 @@
+create or replace PROCEDURE xxpm_insert_APPLY_CREDIT_MEMO (
+                    P_BOOKING_ID	IN NUMBER,
+                    P_ORG_ID		IN NUMBER,
+                    P_ORG_NAME		IN VARCHAR2,
+                    P_INVOICE_ID	IN NUMBER,
+                    P_CREDIT_MEMO_TRX_NUMBER	IN VARCHAR2,
+                    P_INVOICE_NUMBER		IN VARCHAR2,
+                    P_APPLYDATE     IN DATE,
+                    P_GLDATE    IN DATE,
+                    P_INV_AMT			IN NUMBER,
+                    P_APPLIED_RECEIPT_AMOUNT IN NUMBER,
+                    P_BALANCE		IN NUMBER
+) AS
+
+BEGIN
+Insert into XXPM_APPLY_CREDIT_MEMO 
+(
+CREDIT_MEMO_ID,
+BOOKING_ID,
+ORG_ID,
+ORG_NAME,
+INVOICE_ID,
+CREDIT_MEMO_TRX_NUMBER,
+INVOICE_NUMBER,
+APPLYDATE,
+GLDATE,
+INV_AMT,
+APPLIED_RECEIPT_AMOUNT,
+BALANCE
+)values (
+CREDIT_MEMO_ID_S.NEXTVAL,
+P_BOOKING_ID,
+P_ORG_ID,
+P_ORG_NAME,
+P_INVOICE_ID,
+P_CREDIT_MEMO_TRX_NUMBER,
+P_INVOICE_NUMBER,
+to_date(p_APPLYDATE,'DD-MON-RR'),
+to_date(P_GLDATE,'DD-MON-RR'),
+P_INV_AMT,
+P_APPLIED_RECEIPT_AMOUNT,
+P_BALANCE
+);
+COMMIT;
+dbms_output.put_line('RECORD INSERTED--');
+END;

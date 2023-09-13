@@ -1,0 +1,12 @@
+--------------------------------------------------------
+--  DDL for Type CAR_PAK_OBJ_TYPE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TYPE "CAR_PAK_OBJ_TYPE" force AS OBJECT (
+    CARPARK_ID	NUMBER,
+    UNIT_NUMBER VARCHAR2(60),
+	UNIT_ID	NUMBER,
+    CP_UNIT_NUMBER VARCHAR2(60),
+	CP_UNIT_ID	NUMBER,
+    ALLOT_TYPE VARCHAR2(30),
+	CONSTRUCTOR FUNCTION CAR_PAK_OBJ_TYPE RETURN SELF AS RESULT);

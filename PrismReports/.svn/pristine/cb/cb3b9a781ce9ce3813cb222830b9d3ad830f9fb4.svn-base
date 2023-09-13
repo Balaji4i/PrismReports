@@ -1,0 +1,15 @@
+--------------------------------------------------------
+--  DDL for Table XXTEMP_INV_DATA_FIX1
+--------------------------------------------------------
+
+  CREATE TABLE "XXTEMP_INV_DATA_FIX1" 
+   (	"BOOKING_HDR_ID" NUMBER, 
+	"INSTALLMENT_TYPE" VARCHAR2(60), 
+	"INSTALLMENT_TYPE_NAME" VARCHAR2(240), 
+	"INVOICE_ID" NUMBER, 
+	"BOOKING_ID" NUMBER, 
+	"INVOICE_LINE_ID" NUMBER, 
+	"DESCRIPTION" VARCHAR2(240), 
+	"INV_INSTALLMENT_TYPE" VARCHAR2(60), 
+	"INV_INSTALLMENT_TYPE_NAME" VARCHAR2(240)
+   )

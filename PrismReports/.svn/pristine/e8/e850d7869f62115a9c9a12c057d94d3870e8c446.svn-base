@@ -1,0 +1,39 @@
+--------------------------------------------------------
+--  DDL for Procedure UPDBLOCKSTATUS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "UPDBLOCKSTATUS" 
+IS
+  CURSOR C1
+  IS
+    SELECT BH.BLOCK_ID,
+      BH.VALID_UPTO,
+      PU.UNIT_ID,
+      PU.STATUS
+    FROM XXPM_BLOCK_HEADER BH,
+      XXPM_BLOCK_DETAIL BD,
+      XXPM_PROPERTY_UNITS PU
+    WHERE BH.BLOCK_ID      = BD.BLOCK_ID
+    AND BD.UNIT_ID         = PU.UNIT_ID
+    AND BH.BLOCK_TYPE NOT IN ('MB')
+    AND PU.STATUS          ='BLOCK'
+    AND BH.STATUS          ='APR';
+BEGIN
+  FOR I IN C1
+  LOOP
+    
+    IF(trunc(I.VALID_UPTO) < trunc(SYSDATE)) THEN
+     
+      UPDATE XXPM_PROPERTY_UNITS SET STATUS = 'AVAL' WHERE UNIT_ID = I.UNIT_ID;
+      UPDATE XXPM_BLOCK_HEADER SET STATUS = 'EXP' WHERE BLOCK_ID = I.BLOCK_ID;
+    END IF;
+    
+  END LOOP;
+  
+  COMMIT;
+EXCEPTION
+WHEN OTHERS THEN
+
+  ROLLBACK;
+END UPDBLOCKSTATUS;

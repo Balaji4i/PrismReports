@@ -1,0 +1,408 @@
+--------------------------------------------------------
+--  DDL for Procedure XXPM_PROC_PRICELIST_REVISION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "XXPM_PROC_PRICELIST_REVISION" (
+	I_PL_ID IN NUMBER,
+	I_REVISED_BY IN VARCHAR2)
+AS
+        V_PL_ID NUMBER;
+	V_PL_NAME VARCHAR2(60) ;
+	V_PL_NAME_TL VARCHAR2(60);
+	V_DESCRIPTION VARCHAR2(2000); 
+	V_ORG_ID NUMBER;
+	V_FUNC_ID NUMBER; 
+	V_PL_TYPE VARCHAR2(60);
+	V_PRIORITY NUMBER; 
+	V_USAGE VARCHAR2(30);
+	V_CURRENCY_CODE VARCHAR2(3);
+	V_START_DATE DATE;
+	V_END_DATE DATE;
+	V_REVISION_NO NUMBER;
+	V_REVISION_DATE DATE;
+	V_REVISED_BY VARCHAR2(60);
+	V_STATUS VARCHAR2(30);
+	V_FLOW_STATUS VARCHAR2(30);
+	V_FLOW_WITH NUMBER;
+	V_FLOW_LEVEL NUMBER; 
+	V_USER_GRP_ID NUMBER; 
+	V_BASE_PRICE_YN VARCHAR2(1);
+	V_ACTIVE_YN VARCHAR2(1);
+	V_CREATED_BY VARCHAR2(60);
+	V_CREATION_DATE TIMESTAMP(6);
+	V_LAST_UPDATED_BY VARCHAR2(60);
+	V_LAST_UPDATE_DATE TIMESTAMP(6); 
+	V_LAST_UPDATE_LOGIN VARCHAR2(150);
+	V_PL_NUMBER VARCHAR2(60);
+        V_ERRM VARCHAR2(1000);
+
+	CURSOR GET_PLDETAIL(V_PL_ID NUMBER)
+	IS
+		SELECT PLL_ID, 
+			PL_ID, 
+			PROPERTY_ID, 
+			BUILD_ID, 
+			UNIT_ID, 
+			UOM,
+			BASE_PRICE, 
+			MIN_PRICE, 
+			START_DATE, 
+			END_DATE, 
+			REVISION_NO, 
+			REVISION_DATE, 
+			REVISED_BY,
+			ACTIVE_YN,
+			CREATED_BY,
+			CREATION_DATE,
+			LAST_UPDATED_BY,
+			LAST_UPDATE_DATE, 
+			LAST_UPDATE_LOGIN
+		FROM
+			XXPM_PL_LINES
+		WHERE
+			PL_ID = V_PL_ID;
+
+	CURSOR GET_PLMODDETAIL(V_PL_ID NUMBER)
+	IS
+		SELECT PL_MOD_ID,
+			PL_ID,
+			MOD_ID, 
+			START_DATE, 
+			END_DATE, 
+			REVISION_NO, 
+			REVISION_DATE, 
+			REVISED_BY,
+			ACTIVE_YN,
+			CREATED_BY,
+			CREATION_DATE,
+			LAST_UPDATED_BY,
+			LAST_UPDATE_DATE,
+			LAST_UPDATE_LOGIN
+		FROM 
+			XXPM_PL_MODIFIERS
+		WHERE 
+			PL_ID = V_PL_ID;
+
+	CURSOR GET_PLQUALIFIERDETAIL(V_MODPL_ID NUMBER)
+	IS
+		SELECT PL_QLFY_ID,
+			PL_MOD_ID, 
+			QLFY_ID, 
+			START_DATE, 
+			END_DATE, 
+			REVISION_NO, 
+			REVISION_DATE, 
+			REVISED_BY, 
+			ACTIVE_YN,
+			CREATED_BY,
+			CREATION_DATE,
+			LAST_UPDATED_BY,
+			LAST_UPDATE_DATE,
+			LAST_UPDATE_LOGIN
+		FROM
+			XXPM_PL_QUALIFIERS
+		WHERE
+			PL_MOD_ID = V_MODPL_ID;
+
+	BEGIN
+
+			SELECT XPH.PL_ID,
+				XPH.PL_NAME,
+				XPH.PL_NAME_TL,
+				XPH.DESCRIPTION,
+				XPH.ORG_ID,
+				XPH.FUNC_ID,
+				XPH.PL_TYPE,
+				XPH.PRIORITY,
+				XPH.USAGE,
+				XPH.CURRENCY_CODE,
+				XPH.START_DATE,
+				XPH.END_DATE,
+				XPH.REVISION_NO,
+				XPH.REVISION_DATE,
+				XPH.REVISED_BY,
+				XPH.STATUS,
+				XPH.FLOW_STATUS,
+				XPH.FLOW_WITH,
+				XPH.FLOW_LEVEL,
+				XPH.USER_GRP_ID,
+				XPH.BASE_PRICE_YN,
+				XPH.ACTIVE_YN,
+				XPH.CREATED_BY,
+				XPH.CREATION_DATE,
+				XPH.LAST_UPDATED_BY,
+				XPH.LAST_UPDATE_DATE,
+				XPH.LAST_UPDATE_LOGIN,
+				XPH.PL_NUMBER
+			INTO
+				V_PL_ID,
+				V_PL_NAME,
+				V_PL_NAME_TL,
+				V_DESCRIPTION,
+				V_ORG_ID,
+				V_FUNC_ID,
+				V_PL_TYPE,
+				V_PRIORITY,
+				V_USAGE,
+				V_CURRENCY_CODE,
+				V_START_DATE,
+				V_END_DATE,
+				V_REVISION_NO,
+				V_REVISION_DATE,
+				V_REVISED_BY,
+				V_STATUS,
+				V_FLOW_STATUS,
+				V_FLOW_WITH,
+				V_FLOW_LEVEL,
+				V_USER_GRP_ID,
+				V_BASE_PRICE_YN,
+				V_ACTIVE_YN,
+				V_CREATED_BY,
+				V_CREATION_DATE,
+				V_LAST_UPDATED_BY,
+				V_LAST_UPDATE_DATE,
+				V_LAST_UPDATE_LOGIN,
+				V_PL_NUMBER
+			FROM
+				XXPM_PL_HEADER XPH
+			WHERE
+				XPH.PL_ID = I_PL_ID;
+
+            if V_REVISION_NO is null then
+			update XXPM_PL_HEADER set revision_no=0, status='REV', revision_date=sysdate,revised_by=I_REVISED_BY where PL_ID=I_PL_ID;
+			commit;
+                        end if;
+
+            if V_REVISION_NO is not null then
+                        update XXPM_PL_HEADER set revision_no=V_REVISION_NO+1, status='REV', revision_date=sysdate , revised_by=I_REVISED_BY where PL_ID=I_PL_ID;
+			commit;
+            end if;
+
+            begin
+            select REVISION_NO into V_REVISION_NO from XXPM_PL_HEADER WHERE PL_ID=I_PL_ID;
+            EXCEPTION
+                WHEN OTHERS
+                THEN
+                    V_ERRM := SQLCODE || '-' || SQLERRM;
+            end;
+
+            INSERT
+			INTO XXPM_PL_HEADER_H
+			(
+				PL_ID_H,
+				PL_ID,
+				PL_NAME,
+				PL_NAME_TL,
+				DESCRIPTION,
+				ORG_ID,
+				FUNC_ID,
+				PL_TYPE,
+				PRIORITY,
+				USAGE,
+				CURRENCY_CODE,
+				START_DATE,
+				END_DATE,
+				REVISION_NO,
+				REVISION_DATE,
+				REVISED_BY,
+				STATUS,
+				FLOW_STATUS,
+				FLOW_WITH,
+				FLOW_LEVEL,
+				USER_GRP_ID,
+				BASE_PRICE_YN,
+				ACTIVE_YN,
+				CREATED_BY,
+				CREATION_DATE,
+				LAST_UPDATED_BY,
+				LAST_UPDATE_DATE,
+				LAST_UPDATE_LOGIN,
+                                PL_NUMBER
+			)
+			VALUES
+			(
+				XXPM_PRICELIST_HISTORY_S.nextval,
+				V_PL_ID,
+				V_PL_NAME,
+				V_PL_NAME_TL,
+				V_DESCRIPTION,
+				V_ORG_ID,
+				V_FUNC_ID,
+				V_PL_TYPE,
+				V_PRIORITY,
+				V_USAGE,
+				V_CURRENCY_CODE,
+				V_START_DATE,
+				V_END_DATE,
+				V_REVISION_NO,
+				sysdate,
+				I_REVISED_BY,
+				'REV',
+				V_FLOW_STATUS,
+				V_FLOW_WITH,
+				V_FLOW_LEVEL,
+				V_USER_GRP_ID,
+				V_BASE_PRICE_YN,
+				V_ACTIVE_YN,
+				V_CREATED_BY,
+				V_CREATION_DATE,
+				V_LAST_UPDATED_BY,
+				V_LAST_UPDATE_DATE,
+				V_LAST_UPDATE_LOGIN,
+                                V_PL_NUMBER
+			);
+		COMMIT;
+
+		BEGIN
+            UPDATE XXPM_PL_LINES SET REVISION_NO = (SELECT REVISION_NO FROM XXPM_PL_HEADER WHERE PL_ID=I_PL_ID), revision_date=sysdate,revised_by=I_REVISED_BY WHERE PL_ID=I_PL_ID;
+            COMMIT;
+
+    		FOR i IN GET_PLDETAIL(I_PL_ID)
+			LOOP
+        		INSERT
+				INTO XXPM_PL_LINES_H
+				(	
+					PLL_ID_H,
+					PLL_ID, 
+					PL_ID, 
+					PROPERTY_ID, 
+					BUILD_ID, 
+					UNIT_ID, 
+					UOM,
+					BASE_PRICE, 
+					MIN_PRICE, 
+					START_DATE, 
+					END_DATE, 
+					REVISION_NO, 
+					REVISION_DATE, 
+					REVISED_BY,
+					ACTIVE_YN,
+					CREATED_BY,
+					CREATION_DATE,
+					LAST_UPDATED_BY,
+					LAST_UPDATE_DATE,
+					LAST_UPDATE_LOGIN
+				)
+				VALUES
+				(	
+					XXPM_PRICELIST_HISTORY_S.nextval,
+					i.PLL_ID, 
+					i.PL_ID, 
+					i.PROPERTY_ID, 
+					i.BUILD_ID, 
+					i.UNIT_ID, 
+					i.UOM,
+					i.BASE_PRICE, 
+					i.MIN_PRICE, 
+					i.START_DATE, 
+					i.END_DATE, 
+					i.REVISION_NO, 
+					sysdate, 
+					i.REVISED_BY,
+					i.ACTIVE_YN,
+					i.CREATED_BY,
+					i.CREATION_DATE,
+					i.LAST_UPDATED_BY,
+					i.LAST_UPDATE_DATE, 
+					i.LAST_UPDATE_LOGIN	
+				);
+			END LOOP;
+			COMMIT;
+		END;
+
+            BEGIN
+            UPDATE XXPM_PL_MODIFIERS SET REVISION_NO = (SELECT REVISION_NO FROM XXPM_PL_HEADER WHERE PL_ID=I_PL_ID), revision_date=sysdate ,revised_by=I_REVISED_BY WHERE PL_ID=I_PL_ID;
+            COMMIT;
+
+            FOR i IN GET_PLMODDETAIL(I_PL_ID)
+			LOOP
+
+				INSERT
+				INTO XXPM_PL_MODIFIERS_H
+				(
+					PL_MOD_ID_H,
+					PL_MOD_ID, 
+					PL_ID, 
+					MOD_ID, 
+					START_DATE, 
+					END_DATE, 
+					REVISION_NO, 
+					REVISION_DATE, 
+					REVISED_BY,
+					ACTIVE_YN,
+					CREATED_BY,
+					CREATION_DATE,
+					LAST_UPDATED_BY,
+					LAST_UPDATE_DATE,
+					LAST_UPDATE_LOGIN
+				)
+				VALUES
+				(
+					XXPM_PRICELIST_HISTORY_S.nextval,
+					i.PL_MOD_ID,
+					i.PL_ID,
+					i.MOD_ID, 
+					i.START_DATE, 
+					i.END_DATE, 
+					i.REVISION_NO, 
+					sysdate, 
+					i.REVISED_BY,
+					i.ACTIVE_YN,
+					i.CREATED_BY,
+					i.CREATION_DATE,
+					i.LAST_UPDATED_BY,
+					i.LAST_UPDATE_DATE,
+					i.LAST_UPDATE_LOGIN
+				);
+					FOR j IN GET_PLQUALIFIERDETAIL(i.PL_MOD_ID)
+					LOOP
+						UPDATE XXPM_PL_QUALIFIERS SET REVISION_NO = (SELECT REVISION_NO FROM XXPM_PL_MODIFIERS WHERE PL_MOD_ID =i.PL_MOD_ID), revision_date=sysdate,revised_by=I_REVISED_BY WHERE PL_MOD_ID=i.PL_MOD_ID;
+                        COMMIT;
+                        INSERT
+						INTO XXPM_PL_QUALIFIERS_H
+						(
+							PL_QLFY_ID_H,
+							PL_QLFY_ID, 
+							PL_MOD_ID, 
+							QLFY_ID, 
+							START_DATE, 
+							END_DATE, 
+							REVISION_NO, 
+							REVISION_DATE, 
+							REVISED_BY,
+							ACTIVE_YN,
+							CREATED_BY,
+							CREATION_DATE,
+							LAST_UPDATED_BY, 
+							LAST_UPDATE_DATE,
+							LAST_UPDATE_LOGIN
+						)
+						VALUES
+						(
+							XXPM_PRICELIST_HISTORY_S.nextval,
+							j.PL_QLFY_ID,
+							j.PL_MOD_ID, 
+							j.QLFY_ID, 
+							j.START_DATE, 
+							j.END_DATE, 
+							V_REVISION_NO, 
+							sysdate, 
+							I_REVISED_BY, 
+							j.ACTIVE_YN,
+							j.CREATED_BY,
+							j.CREATION_DATE,
+							j.LAST_UPDATED_BY,
+							j.LAST_UPDATE_DATE,
+							j.LAST_UPDATE_LOGIN
+						);
+					END LOOP;
+					COMMIT;	
+			END LOOP;
+			COMMIT;
+		END;
+        EXCEPTION
+                WHEN OTHERS
+                THEN
+                    V_ERRM := SQLCODE || '-' || SQLERRM;
+	END;

@@ -1,0 +1,6 @@
+--------------------------------------------------------
+--  File created - Tuesday-August-13-2019   
+--------------------------------------------------------
+REM INSERTING into XXPM_TEST.XXPM_SETUP_DETAIL
+SET DEFINE OFF;
+Insert into XXPM_TEST.XXPM_SETUP_DETAIL (SETUP_ID,USER_NAME,PASS_WORD,HOLD_DAY,ATTRIBUTE1,ATTRIBUTE2,ATTRIBUTE3,ATTRIBUTE4,ATTRIBUTE5,ATTRIBUTE6,ATTRIBUTE7,ATTRIBUTE8,ATTRIBUTE9,ATTRIBUTE10,CREATED_BY,CREATION_DATE,LAST_UPDATED_BY,LAST_UPDATE_DATE,LAST_UPDATE_LOGIN,INVOICE_TXN_SOURCE_NAME,INVOICE_TXN_SOURCE_TYPE,CREDIT_TXN_SOURCE_NAME,CREDIT_TXN_SOURCE_TYPE,DEBIT_TXN_SOURCE_NAME,DEBIT_TXN_SOURCE_TYPE,FUSION_DOMAIN,FUSION_USERNAME,FUSION_PASSWORD) values (1,'Projects','qwerty123',1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,'ejds-test.fa.em2.oraclecloud.com','Projects','qwerty123');

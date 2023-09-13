@@ -1,0 +1,11 @@
+--------------------------------------------------------
+--  DDL for View XXSTG_ORGANIZATIONS_V
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE VIEW "XXSTG_ORGANIZATIONS_V" ("ORG_ID", "ORG_NAME", "ORG_NAME_TL") AS 
+  SELECT 1 ORG_ID, 'All' ORG_NAME, 'All' ORG_NAME_TL FROM dual
+  UNION ALL
+  SELECT 
+  XXSTG_ORGANIZATIONS.ORG_ID,
+  XXSTG_ORGANIZATIONS.ORG_NAME,
+  XXSTG_ORGANIZATIONS.ORG_NAME_TL FROM XXSTG_ORGANIZATIONS

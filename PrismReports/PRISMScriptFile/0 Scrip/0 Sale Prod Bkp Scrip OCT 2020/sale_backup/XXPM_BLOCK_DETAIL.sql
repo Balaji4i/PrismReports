@@ -1,0 +1,19 @@
+--------------------------------------------------------
+--  DDL for Table XXPM_BLOCK_DETAIL
+--------------------------------------------------------
+
+  CREATE TABLE "XXPM_BLOCK_DETAIL" 
+   (	"BLOCK_DTL_ID" NUMBER, 
+	"BLOCK_ID" NUMBER, 
+	"PROPERTY_ID" NUMBER, 
+	"BUILD_ID" NUMBER, 
+	"UNIT_ID" NUMBER, 
+	"UNBLOCK_FLAG" VARCHAR2(1), 
+	"UNBLOCK_ID" NUMBER, 
+	"OFFER_DTL_ID" NUMBER, 
+	"CREATED_BY" VARCHAR2(60), 
+	"CREATED_DATE" TIMESTAMP (6), 
+	"LAST_UPDATED_BY" VARCHAR2(60), 
+	"LAST_UPDATE_DATE" TIMESTAMP (6), 
+	"LAST_UPDATE_LOGIN" VARCHAR2(60)
+   )

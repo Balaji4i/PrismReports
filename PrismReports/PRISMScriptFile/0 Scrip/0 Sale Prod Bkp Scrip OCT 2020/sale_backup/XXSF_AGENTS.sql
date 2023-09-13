@@ -1,0 +1,19 @@
+--------------------------------------------------------
+--  DDL for Table XXSF_AGENTS
+--------------------------------------------------------
+
+  CREATE TABLE "XXSF_AGENTS" 
+   (	"AGENT_NAME" VARCHAR2(240), 
+	"SECOND_NAME" VARCHAR2(240), 
+	"AGENCY_ID" VARCHAR2(240), 
+	"CUSTOMER_OWNER" VARCHAR2(240), 
+	"RECORD_TYPE" VARCHAR2(240), 
+	"LANGUAGE" VARCHAR2(240), 
+	"PROPERTY_TYPE" VARCHAR2(240), 
+	"STATUS" VARCHAR2(240), 
+	"EMAIL" VARCHAR2(240), 
+	"EMAIL2" VARCHAR2(240), 
+	"MOBILE" VARCHAR2(240), 
+	"MOBILE2" VARCHAR2(240), 
+	"AGENCY_NAME" VARCHAR2(240)
+   )

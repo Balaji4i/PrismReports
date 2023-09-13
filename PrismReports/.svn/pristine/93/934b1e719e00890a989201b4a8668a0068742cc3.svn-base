@@ -1,0 +1,22 @@
+--------------------------------------------------------
+--  DDL for Table XXFND_APPR_USERS
+--------------------------------------------------------
+
+  CREATE TABLE "XXFND_APPR_USERS" 
+   (	"APPR_USER_ID" NUMBER, 
+	"USER_LEVEL_ID" NUMBER, 
+	"SEQ_NUMBER" NUMBER, 
+	"USER_ID" NUMBER, 
+	"APPR_ROLE" VARCHAR2(30), 
+	"APPR_ROLE_DESC" VARCHAR2(240), 
+	"EMP_ID" NUMBER, 
+	"APPR_LIMIT" NUMBER, 
+	"ACTIVE_YN" VARCHAR2(1), 
+	"CREATED_BY" VARCHAR2(60), 
+	"CREATION_DATE" TIMESTAMP (6), 
+	"LAST_UPDATED_BY" VARCHAR2(60), 
+	"LAST_UPDATE_DATE" TIMESTAMP (6), 
+	"LAST_UPDATE_LOGIN" VARCHAR2(150), 
+	"APPR_TYPE" VARCHAR2(30), 
+	"APPR_BY" NUMBER
+   )
